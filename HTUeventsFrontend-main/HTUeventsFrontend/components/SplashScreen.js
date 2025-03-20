@@ -3,7 +3,6 @@ import { StyleSheet, Image, View, Text, TouchableOpacity, Animated } from 'react
 
 const SplashScreen = ({ navigation }) => {
   const [pulseAnim] = useState(new Animated.Value(1)); // Initial scale value for the pulse effect
-  const [fadeAnim, setFadeAnim] = useState(true);
 
   // Pulse Animation
   useEffect(() => {
@@ -21,30 +20,23 @@ const SplashScreen = ({ navigation }) => {
         }),
       ])
     ).start();
-    
-    // Handle the splash screen duration and transition
-    setTimeout(() => {
-      setFadeAnim(false); // Fade out the splash screen after 3 seconds
-    }, 2000); // Duration of the splash screen (2 seconds)
   }, []);
 
   return (
     <View style={styles.container}>
-      {/* Animated Splash Image */}
+      {/* Animated Image */}
       <Animated.Image
         source={require('../images/HTUevents logo.png')} 
         style={[styles.logoImage, { transform: [{ scale: pulseAnim }] }]} // Apply the pulse effect
       />
 
-      {/* Login" Button */}
-      {!fadeAnim && (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.replace('Login')}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-      )}
+      {/* Login Button */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.replace('Login')}
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 };
